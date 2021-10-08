@@ -1,34 +1,91 @@
-import { Component } from '@angular/core';
-
+import { Component, forwardRef } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
   selector: 'filter-rule',
   templateUrl: './filter-rule.component.html',
   styleUrls: ['./filter-rule.component.scss'],
+  providers: [{
+    provide: NG_VALUE_ACCESSOR,
+    useExisting: forwardRef(() => FilterRuleComponent),
+    multi: true,
+  }],
 })
-export class FilterRuleComponent {
-  scriptName: string = '';
+export class FilterRuleComponent implements ControlValueAccessor {
+  // form fields
+  scriptName: any;
   scriptNameList: any[];
 
-  propertyName: string = '';
+  propertyName: any;
   propertyNameList: any[];
 
-  operator: string = '';
+  operator: any;
   operatorList: any[];
 
   searchValue: string = '';
 
+  // ControlValueAccessor stuff
+  private innerValue: any = {};
+
   /**
    *
    */
-  constructor() {
+   constructor() {
     this.scriptNameList = this.getScriptNameList();
     this.propertyNameList = this.getPropertyNameList();
     this.operatorList = this.getOperatorList();
   }
 
+  /// ControlValueAccessor API
+
+  /**
+   *
+   */
+   registerOnChange(fn: any): void {
+    this.onChanged = fn;
+  }
+
+  /**
+   *
+   */
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
+
+  /**
+   *
+   */
+  writeValue(value: any): void {
+    this.innerValue = value;
+
+    // TODO: not correct, but good enough just for reset
+    if (value) {
+      this.scriptName = value.scriptName;
+      this.propertyName = value.scriptName;
+      this.operator = value.scriptName;
+      this.searchValue = value.searchValue;
+    }
+  }
+
+  /**
+   *
+   */
+  changeHandler(): void {
+    this.innerValue = {
+      scriptName: this.scriptName && this.scriptName.code,
+      propertyName: this.propertyName && this.propertyName.code,
+      operator: this.operator && this.operator.code,
+      searchValue: this.searchValue,
+    };
+
+    this.onChanged(this.innerValue);
+  }
+
   /// PRIVATE ZONE
 
+  // ControlValueAccessor stuff
+  private onChanged: any = () => {};
+  private onTouched: any = () => {};
 
   private getScriptNameList(): any[] {
     return [{

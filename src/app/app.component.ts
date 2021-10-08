@@ -26,6 +26,7 @@ export class AppComponent {
    *
    */
   public resetFilters(): void {
-    this.aaa = 123;
+    this.aaa = {};
+    this.bbb = {};
   }
 }
