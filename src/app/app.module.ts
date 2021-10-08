@@ -7,10 +7,12 @@ import { DropdownModule } from 'primeng/dropdown';
 import { InputTextModule } from 'primeng/inputtext';
 
 import { AppComponent } from './app.component';
+import { FilterRuleComponent } from './filter-rule/filter-rule.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    FilterRuleComponent,
   ],
   imports: [
     BrowserModule,

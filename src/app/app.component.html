@@ -2,33 +2,12 @@
 
 <div>
   <h3>RULE #1</h3>
-  <p-dropdown
-    placeholder="Select..."
-    [options]="scriptNameList" [(ngModel)]="scriptName" optionLabel="name"
-  ></p-dropdown>
-
-  <p-dropdown
-    placeholder="Select..."
-    [options]="propertyNameList" [(ngModel)]="propertyName" optionLabel="name"
-    [hidden]="scriptName === ''"
-  ></p-dropdown>
-
-  <p-dropdown
-    placeholder="Select..."
-    [options]="operatorList" [(ngModel)]="operator" optionLabel="name"
-    [hidden]="propertyName === ''"
-  ></p-dropdown>
-
-  <input
-    placeholder="Type something..."
-    pInputText type="text" [(ngModel)]="searchValue"
-    [hidden]="operator === ''"
-  />
+  <filter-rule [(ngModel)]="aaa" ngDefaultControl></filter-rule>
 </div>
 
 <div>
   <h3>RULE #2</h3>
-  TODO: make FilterRuleComponent from rule #1 and reuse it here
+  <filter-rule [(ngModel)]="bbb" ngDefaultControl></filter-rule>
 </div>
 
 <br>
