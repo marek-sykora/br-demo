@@ -96,7 +96,7 @@ export class FilterRuleComponent implements ControlValueAccessor {
       name: 'python_script_2',
     }, {
       code: 'sid3',
-      name: 'python_script_2',
+      name: 'python_script_3',
     }, {
       code: 'sid4',
       name: 'tcl_script_2',

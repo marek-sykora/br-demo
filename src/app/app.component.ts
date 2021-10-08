@@ -1,22 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
 
-  aaa: any = {};
-  bbb: any = {};
+  filterRules: any[] = [];
 
   private formValue: any[] = [];
 
   /**
+   *
+   */
+  ngOnInit(): void {
+    this.addNewRule();
+  }
+
+  /**
    * Just simple output to dev console.
    */
-  public applyFilters(): void {
-    this.formValue = [this.aaa, this.bbb];
+  applyFilters(): void {
+    this.formValue = this.filterRules;
 
     // called by this way to prevent JS and linter errors
     console && console['log'].call(this, '>>>', JSON.stringify(this.formValue));
@@ -25,8 +31,16 @@ export class AppComponent {
   /**
    *
    */
-  public resetFilters(): void {
-    this.aaa = {};
-    this.bbb = {};
+  resetFilters(): void {
+    this.filterRules = [{}];
+  }
+
+
+  public addNewRule(): void {
+    this.filterRules.push({});
+  }
+
+  trackByIndex(index: number, obj: any): any {
+    return index;
   }
 }
