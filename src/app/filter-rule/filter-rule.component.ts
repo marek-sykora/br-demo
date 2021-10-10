@@ -1,3 +1,15 @@
+/**
+ * Helper subcomponent responsible for handling user interactions. Form fields are shown/hidden according to selected value of
+ * other fields. Used as new filter rule wizard.
+ *
+ * Validations will be a big part of this, very probably in several standalone classes.
+ *
+ * There will be encapsulated lots of UI/UX logic. Now is good enough to be passed to standalone developer to finish it.
+ * Public API is defined.
+ *
+ * Other developer could work on filters, it means adding/copying/removing rules or app flow.
+ */
+
 import { Component, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
@@ -12,7 +24,8 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   }],
 })
 export class FilterRuleComponent implements ControlValueAccessor {
-  // form fields
+
+  // form fields - not sure with field names, need to understand to business more
   scriptName: any;
   scriptNameList: any[];
 
@@ -28,6 +41,7 @@ export class FilterRuleComponent implements ControlValueAccessor {
   private innerValue: any = {};
 
   /**
+   * Just fills comboboxes.
    *
    */
    constructor() {
@@ -36,7 +50,7 @@ export class FilterRuleComponent implements ControlValueAccessor {
     this.operatorList = this.getOperatorList();
   }
 
-  /// ControlValueAccessor API
+  /// ControlValueAccessor API, setValue/getValue is handled via ngModel, so just expected API is implemented as needed.
 
   /**
    *
@@ -85,7 +99,9 @@ export class FilterRuleComponent implements ControlValueAccessor {
 
   // ControlValueAccessor stuff
   private onChanged: any = () => {};
-  private onTouched: any = () => {};
+  private onTouched: any = () => {}; // not implemented yet
+
+  /// comboboxes
 
   private getScriptNameList(): any[] {
     return [{
